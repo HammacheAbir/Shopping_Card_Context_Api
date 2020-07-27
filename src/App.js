@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import ProductsPage from './pages/Products';
@@ -22,4 +22,4 @@ const App=props=>{
     );
 }
 
-export default App;
+export default  App;
