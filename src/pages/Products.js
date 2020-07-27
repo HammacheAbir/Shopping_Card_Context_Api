@@ -1,32 +1,31 @@
-import React, { Component } from 'react';
+import React, {useContext} from 'react';
 
 
 import MainNavigation from '../components/MainNavigation';
-import { addProductToCart } from '../store/actions';
 import './Products.css';
 
 import ShopContext from '../context/Shop_Context'
 
-class ProductsPage extends Component {
+const ProductsPage = props=> {
 
-  static contextType=ShopContext
+  const context= useContext(ShopContext)
 
-  render() {
+  
     return (
       <React.Fragment>
-        <MainNavigation cartItemNumber={this.context.cart.reduce((count, curItem) => {
+        <MainNavigation cartItemNumber={context.cart.reduce((count, curItem) => {
       return count + curItem.quantity;
     }, 0)} />
         <main className="products">
           <ul>
-            {this.context.products.map(product => (
+            {context.products.map(product => (
               <li key={product.id}>
                 <div>
                   <strong>{product.title}</strong> - ${product.price}
                 </div>
                 <div>
                   <button
-                    onClick={this.context.addProductToCart.bind(this, product)}
+                    onClick={context.addProductToCart.bind(this, product)}
                   >
                     Add to Cart
                   </button>
@@ -36,8 +35,7 @@ class ProductsPage extends Component {
           </ul>
         </main>
       </React.Fragment>
-    );
-  }
+    ); 
 }
 
 

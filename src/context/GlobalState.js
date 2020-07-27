@@ -1,21 +1,22 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
 import ShopContext from './Shop_Context'
 
-export class GlobalState extends Component {
-    state = {
-        products: [
-          { id: 'p1', title: 'Gaming Mouse', price: 29.99 },
-          { id: 'p2', title: 'Harry Potter 3', price: 9.99 },
-          { id: 'p3', title: 'Used plastic bottle', price: 0.99 },
-          { id: 'p4', title: 'Half-dried plant', price: 2.99 }
-        ],
-        cart: []
-      };
+const GlobalState =props=> {
+
+    const products=[
+      { id: 'p1', title: 'Gaming Mouse', price: 29.99 },
+      { id: 'p2', title: 'Harry Potter 3', price: 9.99 },
+      { id: 'p3', title: 'Used plastic bottle', price: 0.99 },
+      { id: 'p4', title: 'Half-dried plant', price: 2.99 }
+    ] 
+
+    const [cart,setCart]=useState([])
     
-      addProductToCart = product => {
+    
+    const addProductToCart = product => {
         console.log('Adding product', product);
-        const updatedCart = [...this.state.cart];
+        const updatedCart = [...cart];
         const updatedItemIndex = updatedCart.findIndex(
           item => item.id === product.id
         );
@@ -30,13 +31,13 @@ export class GlobalState extends Component {
           updatedCart[updatedItemIndex] = updatedItem;
         }
         setTimeout(() => {
-          this.setState({ cart: updatedCart });
+          setCart(updatedCart);
         }, 700);
       };
     
-      removeProductFromCart = productId => {
+      const removeProductFromCart = productId => {
         console.log('Removing product with id: ' + productId);
-        const updatedCart = [...this.state.cart];
+        const updatedCart = [...cart];
         const updatedItemIndex = updatedCart.findIndex(
           item => item.id === productId
         );
@@ -51,25 +52,25 @@ export class GlobalState extends Component {
           updatedCart[updatedItemIndex] = updatedItem;
         }
         setTimeout(() => {
-          this.setState({ cart: updatedCart });
+          setCart( updatedCart);
         }, 700);
       };
 
 
 
-    render() {
+
         return (
             <ShopContext.Provider value={{
-                products: this.state.products,
-                cart: this.state.cart,
-                addProductToCart: this.addProductToCart,
-                removeProductFromCart: this.removeProductFromCart
+                products: products,
+                cart: cart,
+                addProductToCart: addProductToCart,
+                removeProductFromCart:   removeProductFromCart
                 }}
             >  
-            {this.props.children}  
+            {props.children}  
             </ShopContext.Provider>
         )
-    }
+    
 }
 
 export default GlobalState

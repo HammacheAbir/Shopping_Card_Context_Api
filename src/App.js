@@ -7,13 +7,9 @@ import './App.css';
 
 import GlobalState from './context/GlobalState'
 
-class App extends Component {
+const App=props=>{
   
-
-
-  render() {
-    return (
-      
+    return (   
       <GlobalState>
         <BrowserRouter>
           <Switch>
@@ -24,7 +20,6 @@ class App extends Component {
       </GlobalState>
       
     );
-  }
 }
 
 export default App;
